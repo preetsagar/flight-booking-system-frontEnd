@@ -18,7 +18,7 @@ function AdminLoginPage(props) {
     try {
       e.preventDefault();
       // CALL ADMIN LOGIN API
-      const response = await fetch(`http://${obj.url}/api/users/adminLogin`, {
+      const response = await fetch(`${obj.url}/api/users/adminLogin`, {
         method: "POST",
         body: JSON.stringify({
           email,

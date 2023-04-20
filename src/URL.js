@@ -1,1 +1,1 @@
-export const obj = { url: "flight-booking-system-production.up.railway.app" };
+export const obj = { url: "https://flight-booking-system-production.up.railway.app" };

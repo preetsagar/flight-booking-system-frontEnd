@@ -21,7 +21,7 @@ function AdminHome() {
 
   const checkToken = async (token) => {
     try {
-      const response = await fetch(`http://${obj.url}/api/users/checkToken`, {
+      const response = await fetch(`${obj.url}/api/users/checkToken`, {
         method: "POST",
         body: JSON.stringify({
           token,
@@ -53,7 +53,7 @@ function AdminHome() {
 
   const addFight = async (body) => {
     try {
-      const response = await fetch(`http://${obj.url}/api/flights`, {
+      const response = await fetch(`${obj.url}/api/flights`, {
         method: "POST",
         body: JSON.stringify(body),
         headers: {
@@ -185,7 +185,7 @@ function AdminHome() {
 
   const handleRemoveFlight = async (flight) => {
     try {
-      const response = await fetch(`http://${obj.url}/api/flights`, {
+      const response = await fetch(`${obj.url}/api/flights`, {
         method: "DELETE",
         body: JSON.stringify({ flightNumber: flight, token: localStorage.getItem("token") }),
         headers: {
@@ -211,7 +211,7 @@ function AdminHome() {
 
   const handleSearchFlight = async () => {
     try {
-      const response = await fetch(`http://${obj.url}/api/flights/bookingBasedOnFlight`, {
+      const response = await fetch(`${obj.url}/api/flights/bookingBasedOnFlight`, {
         method: "POST",
         body: JSON.stringify({ flightNumber: search, token: localStorage.getItem("token") }),
         headers: {

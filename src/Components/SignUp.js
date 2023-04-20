@@ -14,7 +14,7 @@ function Signup(props) {
       e.preventDefault();
 
       // CALL LOGIN API
-      const response = await fetch(`http://${obj.url}/api/users/signUp`, {
+      const response = await fetch(`${obj.url}/api/users/signUp`, {
         method: "POST",
         body: JSON.stringify({
           name,

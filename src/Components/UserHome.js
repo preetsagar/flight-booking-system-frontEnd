@@ -13,7 +13,7 @@ function UserHome() {
   // Make sure the user is logged in before rendering the page
   const checkToken = async (token) => {
     try {
-      const response = await fetch(`http://${obj.url}/api/users/checkToken`, {
+      const response = await fetch(`${obj.url}/api/users/checkToken`, {
         method: "POST",
         body: JSON.stringify({
           token,
@@ -53,7 +53,7 @@ function UserHome() {
     const from = "Delhi";
     const to = "Bengaluru";
 
-    const url = `http://${obj.url}/api/flights/search?from=${from}&to=${to}&date=${searchDate}&time=${searchTime}`;
+    const url = `${obj.url}/api/flights/search?from=${from}&to=${to}&date=${searchDate}&time=${searchTime}`;
     let response = await fetch(url, {
       method: "POST",
       body: JSON.stringify({
@@ -77,7 +77,7 @@ function UserHome() {
     console.log(searchDate);
     try {
       console.log(localStorage.getItem("token"));
-      let response = await fetch(`http://${obj.url}/api/flights/book`, {
+      let response = await fetch(`${obj.url}/api/flights/book`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -100,7 +100,7 @@ function UserHome() {
 
   // Function to load all the bookings made by the user
   const loadBookings = async () => {
-    const url = `http://${obj.url}/api/flights/myBookings`;
+    const url = `${obj.url}/api/flights/myBookings`;
     let response = await fetch(url, {
       method: "POST",
       body: JSON.stringify({

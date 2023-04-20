@@ -21,7 +21,7 @@ function LoginPage(props) {
       e.preventDefault();
 
       // CALL LOGIN API
-      const response = await fetch(`http://${obj.url}/api/users/login`, {
+      const response = await fetch(`${obj.url}/api/users/login`, {
         method: "POST",
         body: JSON.stringify({
           email,
