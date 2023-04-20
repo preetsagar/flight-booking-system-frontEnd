@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
+import AdminLoginPage from "./Components/AdminLogin";
+import LoginPage from "./Components/Login";
+import Signup from "./Components/SignUp";
+import UserHome from "./Components/UserHome";
+import { useState } from "react";
+import AdminHome from "./Components/AdminHome";
 
 function App() {
+  const [user, setUser] = useState("");
+  const [token, setToken] = useState("");
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<LoginPage setToken={setToken} setUser={setUser} />} />
+        <Route path="/adminLogin" element={<AdminLoginPage setToken={setToken} setUser={setUser} />} />
+        <Route path="/signIn" element={<Signup setToken={setToken} setUser={setUser} />} />
+        <Route path="/users">
+          <Route index element={<UserHome />} />
+        </Route>
+        <Route path="/adminHome" element={<AdminHome />} />
+      </Routes>
+    </>
   );
 }
 
