@@ -3,8 +3,16 @@ import "./style/AdminHome.css";
 import { obj } from "./../URL";
 import { useNavigate } from "react-router-dom";
 
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import { Button } from "@mui/material";
+
 function AdminHome() {
-  const [flights, setFlights] = useState([]);
+  const [flights, setFlights] = useState();
   const [flightNumber, setFlightNumber] = useState("");
   const [airline, setAirline] = useState("");
   const [from, setFrom] = useState("");
@@ -40,6 +48,7 @@ function AdminHome() {
       navigate("/", { replace: true });
     }
   };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
@@ -72,6 +81,7 @@ function AdminHome() {
       navigate("/", { replace: true });
     }
   };
+
   const handleAddFlight = () => {
     const newFlight = {
       flightNumber,
@@ -237,42 +247,45 @@ function AdminHome() {
     <div className="container">
       <div className="search-container">
         <h2>Admin Home Page</h2>
+        <div>scroll down for more</div>
         <div className="search-div">
           <div className="heading1" style={{ alignSelf: "center" }}>
             Add Flight
           </div>
 
-          <div>
-            <label>Flight </label>
-            <input type="text" value={flightNumber} onChange={(e) => setFlightNumber(e.target.value)} />
-          </div>
-          <div>
-            <label>Airline </label>
-            <input type="text" value={airline} onChange={(e) => setAirline(e.target.value)} />
-          </div>
-          <div>
-            <label>From </label>
-            <input type="text" value={from} onChange={(e) => setFrom(e.target.value)} />
-          </div>
-          <div>
-            <label>To </label>
-            <input type="text" value={to} onChange={(e) => setTo(e.target.value)} />
-          </div>
-          <div>
-            <label>Duration </label>
-            <input type="number" value={duration} onChange={(e) => setDuration(e.target.value)} />
-          </div>
-          <div>
-            <label>Price </label>
-            <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} />
-          </div>
-          <div>
-            <label>Arrival Time </label>
-            <input type="time" value={arrivalTime} onChange={(e) => setArrivalTime(e.target.value)} />
-          </div>
-          <div>
-            <label>Departure Time </label>
-            <input type="time" value={departureTime} onChange={(e) => setDepartureTime(e.target.value)} />
+          <div className="upper-label-div">
+            <div className="label-div">
+              <label className="label-class">Flight </label>
+              <input type="text" value={flightNumber} onChange={(e) => setFlightNumber(e.target.value)} />
+            </div>
+            <div className="label-div">
+              <label className="label-class">Airline </label>
+              <input type="text" value={airline} onChange={(e) => setAirline(e.target.value)} />
+            </div>
+            <div className="label-div">
+              <label className="label-class">From </label>
+              <input type="text" value={from} onChange={(e) => setFrom(e.target.value)} />
+            </div>
+            <div className="label-div">
+              <label className="label-class">To </label>
+              <input type="text" value={to} onChange={(e) => setTo(e.target.value)} />
+            </div>
+            <div className="label-div">
+              <label className="label-class">Duration </label>
+              <input type="number" value={duration} onChange={(e) => setDuration(e.target.value)} />
+            </div>
+            <div className="label-div">
+              <label className="label-class">Price </label>
+              <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} />
+            </div>
+            <div className="label-div">
+              <label className="label-class">Arrival Time </label>
+              <input type="time" value={arrivalTime} onChange={(e) => setArrivalTime(e.target.value)} />
+            </div>
+            <div className="label-div">
+              <label className="label-class">Departure Time </label>
+              <input type="time" value={departureTime} onChange={(e) => setDepartureTime(e.target.value)} />
+            </div>
           </div>
 
           <button onClick={handleAddFlight} style={{ alignSelf: "center" }}>
@@ -284,9 +297,11 @@ function AdminHome() {
       <div className="search-container">
         <div className="heading1">Remove Flight</div>
         <div className="search-div">
-          <div>
-            <label>Flight Number </label>
-            <input type="text" value={remove} onChange={(e) => setRemove(e.target.value)} />
+          <div className="upper-label-div">
+            <div className="label-div">
+              <label className="label-class">Flight Number </label>
+              <input type="text" value={remove} onChange={(e) => setRemove(e.target.value)} />
+            </div>
           </div>
           <button onClick={() => handleRemoveFlight(remove)} style={{ alignSelf: "center" }}>
             Remove
@@ -297,14 +312,16 @@ function AdminHome() {
       <div className="search-container">
         <h3>View Bookings</h3>
         <div className="search-div">
-          <div>
-            <label>Flight Number </label>
-            <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} />
+          <div className="upper-label-div">
+            <div className="label-div">
+              <label className="label-class">Flight Number </label>
+              <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} />
+            </div>
           </div>
           <button onClick={handleSearchFlight} style={{ alignSelf: "center" }}>
             Search
           </button>
-          {flights && (
+          {/* {flights && (
             <div>
               <div>
                 <table>
@@ -325,6 +342,41 @@ function AdminHome() {
                 </table>
               </div>
             </div>
+          )} */}
+          {flights && (
+            <TableContainer
+              sx={{
+                // width: "50%",
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Table
+                className="table-div"
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <TableHead>
+                  <TableRow sx={{ display: "flex", justifyContent: "space-around" }}>
+                    <TableCell>Flight</TableCell>
+                    <TableCell>User</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {flights.map((flight) => (
+                    <TableRow key={flight._id} sx={{ display: "flex", justifyContent: "space-around" }}>
+                      <TableCell>{flight.flight}</TableCell>
+                      <TableCell>{flight.user}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
           )}
         </div>
       </div>
@@ -334,6 +386,7 @@ function AdminHome() {
           localStorage.removeItem("token");
           navigate("/adminLogin");
         }}
+        style={{ margin: "40px" }}
       >
         Logout
       </button>

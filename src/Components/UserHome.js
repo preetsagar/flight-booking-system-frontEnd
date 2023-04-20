@@ -3,6 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { obj } from "./../URL";
 import "./style/UserHome.css";
 
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import { Button } from "@mui/material";
+
 function UserHome() {
   const [searchDate, setSearchDate] = useState("");
   const [searchTime, setSearchTime] = useState("");
@@ -93,6 +101,7 @@ function UserHome() {
       console.log(response);
       searchFlights();
       loadBookings();
+      alert(`${response.status}, See my bookings for more options`);
     } catch (error) {
       alert(error);
     }
@@ -112,6 +121,7 @@ function UserHome() {
     });
     response = await response.json();
     if (response.status === "Success") {
+      response.data.reverse();
       setBooking(response.data);
       console.log(response);
     } else {
@@ -122,26 +132,27 @@ function UserHome() {
   return (
     <div className="container">
       <div className="search-container">
-        <div className="heading1">WELCOME {localStorage.getItem("user")}</div>
-        <div className="heading2">welcome to flight booking system</div>
+        <div className="heading-main">Welcome {localStorage.getItem("user")}</div>
+        <div className="heading-sub">welcome to flight booking system</div>
 
-        <div className="search-div">
+        <div className="search-div-user">
           <div style={{ fontWeight: "600", alignSelf: "center" }}>Search Flights</div>
-          <div>
-            <label>Select Date </label>
+
+          <div style={{ width: "50%", display: "flex", justifyContent: "space-between", paddingTop: "10px" }}>
+            <label className="label-user">Select Date </label>
             <input type="date" value={searchDate} onChange={(e) => setSearchDate(e.target.value)} />
           </div>
-          <div>
-            <label>Select Time</label>
+          <div style={{ width: "50%", display: "flex", justifyContent: "space-between", paddingTop: "10px" }}>
+            <label className="label-user">Select Time</label>
             <input type="time" value={searchTime} onChange={(e) => setSearchTime(e.target.value)} />
           </div>
-          <button onClick={searchFlights} style={{ alignSelf: "center" }}>
+          <button onClick={searchFlights} style={{ alignSelf: "center", fontSize: "15px", padding: "8px" }}>
             Search
           </button>
         </div>
       </div>
 
-      {flights && (
+      {/* {flights && (
         <div className="available-container">
           <div className="heading1">Available Flights</div>
           <div>
@@ -175,9 +186,44 @@ function UserHome() {
             </table>
           </div>
         </div>
+      )} */}
+      {flights && (
+        <TableContainer className="available-container" style={{ width: "50%" }}>
+          <div className="heading1">Available Flights</div>
+          <Table sx={{ minWidth: 100 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Airline</TableCell>
+                <TableCell>Flight</TableCell>
+                <TableCell>Arrival</TableCell>
+                <TableCell>Departure</TableCell>
+                <TableCell>Seats</TableCell>
+                <TableCell>Price</TableCell>
+                <TableCell>Book</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {flights.map((flight) => (
+                <TableRow key={flight._id}>
+                  <TableCell>{flight.airLine}</TableCell>
+                  <TableCell>{flight.flightNumber}</TableCell>
+                  <TableCell>{flight.arrivalTime}</TableCell>
+                  <TableCell>{flight.departureTime}</TableCell>
+                  <TableCell>{flight.day[0]}</TableCell>
+                  <TableCell>{flight.price}</TableCell>
+                  <TableCell>
+                    <Button variant="contained" color="primary" onClick={() => bookFlight(flight)}>
+                      Book
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       )}
 
-      {booking && (
+      {/* {booking && (
         <div className="available-container">
           <div className="heading1">My Bookings:</div>
           <table>
@@ -197,12 +243,34 @@ function UserHome() {
             </tbody>
           </table>
         </div>
+      )} */}
+      {booking && (
+        <TableContainer className="available-container" style={{ width: "50%" }}>
+          <div className="heading1">My Bookings</div>
+          <Table sx={{ minWidth: 100, display: "flex", flexDirection: "column" }} aria-label="simple table">
+            <TableHead>
+              <TableRow sx={{ display: "flex", justifyContent: "space-evenly" }}>
+                <TableCell>Flight</TableCell>
+                <TableCell>Date</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {booking.map((book) => (
+                <TableRow key={book._id} sx={{ display: "flex", justifyContent: "space-evenly" }}>
+                  <TableCell>{book.flightNumber}</TableCell>
+                  <TableCell>{book.date}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       )}
       <button
         onClick={() => {
           localStorage.removeItem("token");
           navigate("/");
         }}
+        style={{ margin: "20px" }}
       >
         Logout
       </button>
