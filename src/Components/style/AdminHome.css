@@ -27,9 +27,6 @@
     width: 100%;
 }
 
-.label-class{
-    /* padding-right: 80px; */
-}
 
 .heading1{
     font-size: 20px;
@@ -75,13 +72,4 @@
 button{
     font-size: 15px;
     padding: 8px;
-}
-
-
-.table-div{
-    /* sx={{ width: "100%", display: "flex", flexDirection: "column", alignContent: "center" }} */
-    /* width: 100%;
-    display: flex;
-    flex-direction: column; */
-    /* font-size: 50px; */
 }
