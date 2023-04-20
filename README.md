@@ -1,11 +1,24 @@
-## Please use mentioned admin credintial for using admin functionality
+## Please utilize the provided administrative credentials to access and utilize the administrative functionality.
 #### email - admin1@gmail.com
 #### password - 1234
 
 
-## link
+## link to access
 ```
 https://flight-booking-system-frontend.vercel.app/
+```
+
+## Backend
+```
+https://github.com/preetsagar/flight-booking-system
+```
+Api docs
+```
+https://documenter.getpostman.com/view/14979389/2s93Y3ugGo
+```
+Deployed on the railway.app platform
+```
+https://flight-booking-system-production.up.railway.app/
 ```
 
 
